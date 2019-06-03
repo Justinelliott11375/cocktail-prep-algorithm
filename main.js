@@ -23,6 +23,7 @@ var daiquiri = new drink("large shaker tin", "coupe", "shake", null, "lime wheel
 var orderArray = [manhattan, martini, mojito, vodkaSoda, daiquiri, manhattan];
 
 function makeDrinkOrder(array) {
+    var groupCounter = 0;
     console.log("Mise en place: ")
     for (let i = 0; i < array.length; i++) {
         if (array[i].prepVessel !== null && array[i].glassware == "coupe") {
@@ -34,12 +35,15 @@ function makeDrinkOrder(array) {
         }
     }
     console.log("Ingredients: ");
-    for (let i = 0; i < array.length; i++) {
+    for (let drinkIndex = 0; drinkIndex < array.length; drinkIndex++) {
 
-        if (array[i].method == "stir") {
-            for (let j = 0; j < array[i].recipe.length; j++) {
-                if (array[i].recipe[j] !== null) {
-                    console.log("In " + array[i].prepVessel + " " + (i + 1) + " add " + array[i].recipe[j]);
+        if (array[drinkIndex].method == "stir") {
+            for (let groupIndex = 0; groupIndex < array[drinkIndex].recipe.length; groupIndex++) {
+                if (array[drinkIndex].recipe[groupIndex] !== null) {
+                    for (let ingredientIndex = 0; ingredientIndex < array[drinkIndex].recipe[groupIndex].length; ingredientIndex++) {
+                        //console.log("k loop");
+                        console.log("In " + array[drinkIndex].prepVessel + " " + (drinkIndex + 1) + " add " + array[drinkIndex].recipe[groupIndex][ingredientIndex]);
+                    }
                 }
             }
         }
