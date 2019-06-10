@@ -13,8 +13,17 @@ function drink(prepVessel, glassware, method, ice, garnish, muddleInsert, bitter
     this.lengthener = lengthener;
     this.recipe = [this.muddleInsert, this.bittersDropper, this.syrup, this.juice, this.modifier, this.baseSpirit, this.lengthener];
 
+};
+
+function ingredient(amount, unit, name) {
+    this.amount = amount;
+    this.unit = unit;
+    this.name = name;
 }
 
+var newDrink = new drink(null, null, null, null, null, [], [], [], [], [], [], []);
+newDrink.bittersDropper[0] = new ingredient(.75, "oz", "lemon juice");
+newDrink.bittersDropper[1] = new ingredient(.75, "oz", "lime juice");
 var manhattan = new drink("mixing glass", "coupe", "stir", null, "cherry and expressed orange peel", null, ["1 Dash Angostura Bitters", "1 Dash Orange Bitters"], null, null, ["1 oz Sweet Vermouth"], ["2 oz Rye Whiskey"], null);
 var martini = new drink("mixing glass", "coupe", "stir", null, "lemon peel", null, ["1 Dash Orange Bitters"], null, null, ["1 oz Dry Vermouth"], ["2 oz Gin"], null);
 var mojito = new drink("large shaker tin", "collins glass", "shake", "collins spear", ["mint sprig"], ["7-10 muddled mint leaves"], null, [".75 oz simple syrup"], [".75 oz lime juice"], null, ["2 oz light rum"], ["Soda water"]);
@@ -52,7 +61,7 @@ function makeDrinkOrder(array) {
                         //console.log("k loop");
                         //ingredientLoopCounter += 1;
                         //console.log("ingredientLoopCounter: " + ingredientLoopCounter);
-                        console.log("In " + array[drinkIndex].prepVessel + " " + (drinkIndex + 1) + " add " + array[drinkIndex].recipe[groupIndex][ingredientIndex]);
+                        console.log("In " + array[drinkIndex].prepVessel + " at position " + (drinkIndex + 1) + " add " + array[drinkIndex].recipe[groupIndex][ingredientIndex]);
                         /*for(let j = drinkIndex+1; j < array.length; j++){
                           console.log("next drink: " + array[drinkIndex+1].recipe[groupIndex][ingredientIndex]);
                           console.log("current drink: " + array[drinkIndex].recipe[groupIndex][ingredientIndex]);
@@ -72,7 +81,7 @@ function makeDrinkOrder(array) {
                     for (let ingredientIndex = 0; ingredientIndex < array[drinkIndex].recipe[groupIndex].length; ingredientIndex++) {
                         //ingredientLoopCounter += 1;
                         //console.log("ingredientLoopCounter: " + ingredientLoopCounter);
-                        console.log("In " + array[drinkIndex].prepVessel + " " + (drinkIndex + 1) + " add " + array[drinkIndex].recipe[groupIndex][ingredientIndex]);
+                        console.log("In " + array[drinkIndex].prepVessel + " at position " + (drinkIndex + 1) + " add " + array[drinkIndex].recipe[groupIndex][ingredientIndex]);
                         /*for(let j = drinkIndex+1; j < array.length; j++){
                           console.log("next drink: " + array[drinkIndex+1].recipe[groupIndex][ingredientIndex]);
                           console.log("current drink: " + array[drinkIndex].recipe[groupIndex][ingredientIndex]);
