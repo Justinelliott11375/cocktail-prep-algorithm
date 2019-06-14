@@ -15,18 +15,51 @@ function ingredient(amount, unit, name, type) {
     this.drinkIndex = null;
 }
 
+muddleInsertArray = [];
+bittersDropperArray = [];
+syrupArray = [];
+juiceArray = [];
+modifierArray = [];
+baseSpiritArray = [];
+lengthenerArray = [];
+//recipeArray = [muddleInsertArray, bitersDropperArray, syrupArray, juiceArray, modifierArray, baseSpiritArray, lengthenerArray];
 var manhattan = new drink("mixing glass", "coupe", "stir", null, "cherry and expressed orange peel");
 var martini = new drink("mixing glass", "coupe", "stir", null, "lemon peel");
-var mojito = new drink("large shaker tin", "collins glass", "shake", "collins spear", ["mint sprig"], ["7-10 muddled mint leaves"], null, [".75 oz simple syrup"], [".75 oz lime juice"], null, ["2 oz light rum"], ["Soda water"]);
+var mojito = new drink("large shaker tin", "collins glass", "shake", "collins spear", "mint sprig");
 var vodkaSoda = new drink(null, "rocks glass", "build", "kold draft", "lime wedge");
 var daiquiri = new drink("large shaker tin", "coupe", "shake", null, "lime wheel");
 var beesKnees = new drink("large shaker tin", "coupe", "shake", null, null);
 
+manhattan.recipe = [new ingredient(2, "oz", "rye whiskey", "baseSpirit"), new ingredient(1, "oz", "sweet vermouth", "modifier"), new ingredient(1, "dash", "angostura bitters", "bittersDropper"), new ingredient(1, "dash", "orange bitters", "bittersDropper")];
 mojito.recipe = [new ingredient("7-10", "leaves of", "mint", "muddlInsert"), new ingredient(.75, "oz", "simple syrup", "syrup"), new ingredient(.75, "oz", "lime juice", "juice"), new ingredient(2, "oz", "light rum", "baseSpirit"), new ingredient("2", "oz", "soda water", "lengthener")];
+vodkaSoda.recipe = [new ingredient(1.5, "oz", "vodka", "baseSpirit"), new ingredient(null, null, "soda water")];
 daiquiri.recipe = [new ingredient(.75, "oz", "simple syrup", "syrup"), new ingredient(.75, "oz", "lime juice", "juice"), new ingredient(2, "oz", "light rum", "baseSpirit")];
 beesKnees.recipe = [new ingredient(.75, "oz", "honey syrup", "syrup"), new ingredient(.75, "oz", "lemon juice", "juice"), new ingredient(2, "oz", "gin", "baseSpirit")];
 var orderArray = [manhattan, manhattan, martini, mojito, vodkaSoda, daiquiri];
-var orderArrayTwo = [daiquiri, mojito, beesKnees];
+var orderArrayTwo = [daiquiri, manhattan, mojito, beesKnees];
+
+function makeDrinks(array) {
+    for (let i = 0; i < array.length; i++) {
+        for (let j = 0; j < array[i].recipe.length; j++) {
+            array[i].recipe[j].drinkIndex = i + 1;
+            if (array[i].recipe[j].type === "muddleInsert") {
+                muddleInsertArray.push(array[i].recipe[j]);
+            } else if (array[i].recipe[j].type === "bittersDropper") {
+                bittersDropperArray.push(array[i].recipe[j]);
+            } else if (array[i].recipe[j].type === "syrup") {
+                syrupArray.push(array[i].recipe[j]);
+            } else if (array[i].recipe[j].type === "juice") {
+                juiceArray.push(array[i].recipe[j]);
+            } else if (array[i].recipe[j].type === "modifier") {
+                modifierArray.push(array[i].recipe[j]);
+            } else if (array[i].recipe[j].type === "baseSpirit") {
+                baseSpiritArray.push(array[i].recipe[j]);
+            } else {
+                lengthenerArray.push(array[i].recipe[j]);
+            }
+        }
+    }
+}
 
 function makeDrinkOrder(array) {
     //start timer here
